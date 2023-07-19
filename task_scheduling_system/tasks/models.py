@@ -1,6 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
+from ..users.models import CustomUser
+
 
 # Create your models here.
 
@@ -26,6 +28,8 @@ class Task(models.Model):
     to_do = models.BooleanField(default=False)
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
+
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def clean(self):
         if self.description is None:
