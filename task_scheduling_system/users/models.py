@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import EmailField, CharField
-from .managers import MyUserManager
+
+from .managers import CustomUserManager
 
 
 # Create your models here.
@@ -15,7 +16,7 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["full_name", "username"]
 
-    objects = MyUserManager()
+    objects = CustomUserManager()
 
     def __str__(self):
         return self.email

@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
             managers=[
-                ('objects', task_scheduling_system.users.managers.MyUserManager()),
+                ('objects', task_scheduling_system.users.managers.CustomUserManager()),
             ],
         ),
     ]

@@ -2,7 +2,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import UserManager
 
 
-class MyUserManager(UserManager):
+class CustomUserManager(UserManager):
     """Custom manager for the User model."""
 
     def _create_user(self, email: str, password: str | None, **extra_fields):
