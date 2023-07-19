@@ -8,7 +8,7 @@ from .managers import CustomUserManager
 
 class CustomUser(AbstractUser):
     email = EmailField("Email address", unique=True)
-    full_name = CharField("Name of User", blank=True, max_length=255)
+    full_name = CharField("Name of User", max_length=255)
     username = CharField("Username", max_length=64, unique=True)
     first_name = None
     last_name = None
