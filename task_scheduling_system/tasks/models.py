@@ -23,6 +23,7 @@ class Task(models.Model):
     planned_time = models.DateTimeField(blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=0)
     priority = models.SmallIntegerField(choices=PRIORITY_CHOICES, default=1)
+    to_do = models.BooleanField(default=False)
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
 
