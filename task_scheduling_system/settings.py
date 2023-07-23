@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd party
+    'rest_framework',
     # Project apps
     "task_scheduling_system.users",
     "task_scheduling_system.tasks",
