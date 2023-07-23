@@ -1,4 +1,5 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
+
 from .serializers import TaskSerializer
 from ..models import Task
 
