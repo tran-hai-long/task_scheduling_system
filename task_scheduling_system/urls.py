@@ -22,4 +22,5 @@ from task_scheduling_system.tasks import urls as tasks_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tasks/', include(tasks_urls)),
+    path('api-auth/', include('rest_framework.urls'))
 ]
