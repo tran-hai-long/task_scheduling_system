@@ -4,12 +4,114 @@ info:
   version: 0.1.0
   description: Task scheduling system
 paths:
-  /tasks/api/v1/:
+  /api/v1/task/{id}:
     get:
-      operationId: root_list
+      operationId: v1_task_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - v1
       security:
-      - cookieAuth: []
-      - basicAuth: []
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: ''
+    put:
+      operationId: v1_task_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Task'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Task'
+        required: true
+      security:
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: ''
+    patch:
+      operationId: v1_task_partial_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTask'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTask'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTask'
+      security:
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: ''
+    delete:
+      operationId: v1_task_destroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - v1
+      security:
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
+      responses:
+        '204':
+          description: No response body
+  /api/v1/tasks/:
+    get:
+      operationId: v1_tasks_list
+      tags:
+        - v1
+      security:
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
       responses:
         '200':
           content:
@@ -20,7 +122,9 @@ paths:
                   $ref: '#/components/schemas/Task'
           description: ''
     post:
-      operationId: root_create
+      operationId: v1_tasks_create
+      tags:
+        - v1
       requestBody:
         content:
           application/json:
@@ -34,8 +138,8 @@ paths:
               $ref: '#/components/schemas/Task'
         required: true
       security:
-      - cookieAuth: []
-      - basicAuth: []
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
       responses:
         '201':
           content:
@@ -43,106 +147,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Task'
           description: ''
-  /tasks/api/v1/{id}:
+  /api/v1/to-do:
     get:
-      operationId: root_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Task'
-          description: ''
-    put:
-      operationId: root_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Task'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Task'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Task'
-        required: true
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Task'
-          description: ''
-    patch:
-      operationId: root_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedTask'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedTask'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedTask'
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Task'
-          description: ''
-    delete:
-      operationId: root_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      responses:
-        '204':
-          description: No response body
-  /tasks/api/v1/to-do:
-    get:
-      operationId: to_do_list
+      operationId: v1_to_do_list
       tags:
-      - to-do
+        - v1
       security:
-      - cookieAuth: []
-      - basicAuth: []
+        - cookieAuth: [ ]
+        - basicAuth: [ ]
       responses:
         '200':
           content:
@@ -194,9 +206,9 @@ components:
           readOnly: true
     PriorityEnum:
       enum:
-      - 0
-      - 1
-      - 2
+        - 0
+        - 1
+        - 2
       type: integer
       description: |-
         * `0` - Thap
@@ -204,9 +216,9 @@ components:
         * `2` - Cao
     StatusEnum:
       enum:
-      - 0
-      - 1
-      - 2
+        - 0
+        - 1
+        - 2
       type: integer
       description: |-
         * `0` - Chua lam
@@ -251,10 +263,10 @@ components:
           format: date-time
           readOnly: true
       required:
-      - created_time
-      - id
-      - modified_time
-      - name
+        - created_time
+        - id
+        - modified_time
+        - name
   securitySchemes:
     basicAuth:
       type: http

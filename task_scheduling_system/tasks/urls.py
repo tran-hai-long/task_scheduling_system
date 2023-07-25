@@ -11,9 +11,9 @@ urlpatterns = [
          name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'),
          name='redoc'),
-    path(route='api/v1/', view=TaskListCreateAPIView.as_view(),
+    path(route='api/v1/tasks/', view=TaskListCreateAPIView.as_view(),
          name='task_list_create_api'),
-    path(route='api/v1/<int:pk>', view=TaskRetrieveUpdateDestroyAPIView.as_view(),
+    path(route='api/v1/task/<int:pk>', view=TaskRetrieveUpdateDestroyAPIView.as_view(),
          name='task_retrieve_update_destroy_api'),
     path(route='api/v1/to-do', view=TodoListAPIView.as_view(), name='todo_list_api'),
 ]
