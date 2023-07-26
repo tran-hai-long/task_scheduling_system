@@ -20,7 +20,8 @@ from django.urls import path, include
 from task_scheduling_system.tasks import urls as tasks_urls
 
 urlpatterns = [
-    path('', include(tasks_urls)),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
+    path('', include(tasks_urls)),
 ]

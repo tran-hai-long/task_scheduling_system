@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party
     'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
     'drf_spectacular',
     # Project apps
     "task_scheduling_system.users",
