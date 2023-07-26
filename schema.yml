@@ -183,7 +183,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDetails'
+                $ref: '#/components/schemas/CustomUser'
           description: ''
     put:
       operationId: auth_user_update
@@ -202,13 +202,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserDetails'
+              $ref: '#/components/schemas/CustomUser'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/UserDetails'
+              $ref: '#/components/schemas/CustomUser'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/UserDetails'
+              $ref: '#/components/schemas/CustomUser'
+        required: true
       security:
         - cookieAuth: [ ]
         - basicAuth: [ ]
@@ -217,7 +218,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDetails'
+                $ref: '#/components/schemas/CustomUser'
           description: ''
     patch:
       operationId: auth_user_partial_update
@@ -236,13 +237,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedUserDetails'
+              $ref: '#/components/schemas/PatchedCustomUser'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedUserDetails'
+              $ref: '#/components/schemas/PatchedCustomUser'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedUserDetails'
+              $ref: '#/components/schemas/PatchedCustomUser'
       security:
         - cookieAuth: [ ]
         - basicAuth: [ ]
@@ -251,7 +252,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDetails'
+                $ref: '#/components/schemas/CustomUser'
           description: ''
   /api/v1/tasks/task/{id}:
     get:
@@ -415,6 +416,30 @@ paths:
           description: ''
 components:
   schemas:
+    CustomUser:
+      type: object
+      description: User model w/o password
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        username:
+          type: string
+          maxLength: 64
+        full_name:
+          type: string
+          title: Name of User
+          maxLength: 255
+      required:
+        - email
+        - full_name
+        - id
+        - username
     Login:
       type: object
       properties:
@@ -467,6 +492,25 @@ components:
         - new_password2
         - token
         - uid
+    PatchedCustomUser:
+      type: object
+      description: User model w/o password
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        username:
+          type: string
+          maxLength: 64
+        full_name:
+          type: string
+          title: Name of User
+          maxLength: 255
     PatchedTask:
       type: object
       properties:
@@ -504,25 +548,6 @@ components:
         modified_time:
           type: string
           format: date-time
-          readOnly: true
-    PatchedUserDetails:
-      type: object
-      description: User model w/o password
-      properties:
-        pk:
-          type: integer
-          readOnly: true
-          title: ID
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
           readOnly: true
     PriorityEnum:
       enum:
@@ -604,30 +629,6 @@ components:
           maxLength: 40
       required:
         - key
-    UserDetails:
-      type: object
-      description: User model w/o password
-      properties:
-        pk:
-          type: integer
-          readOnly: true
-          title: ID
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-      required:
-        - email
-        - first_name
-        - last_name
-        - pk
   securitySchemes:
     basicAuth:
       type: http

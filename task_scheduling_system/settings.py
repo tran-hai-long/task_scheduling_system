@@ -133,6 +133,10 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
+REST_AUTH = {
+    'USER_DETAILS_SERIALIZER': 'task_scheduling_system.users.serializers.CustomUserSerializer',
+}
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Task scheduling system',
     'DESCRIPTION': 'Task scheduling system',
