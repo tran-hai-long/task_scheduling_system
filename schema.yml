@@ -16,7 +16,7 @@ paths:
         Accept the following POST parameters: username, password
         Return the REST Framework Token Object's key.
       tags:
-        - auth
+      - auth
       requestBody:
         content:
           application/json:
@@ -30,9 +30,9 @@ paths:
               $ref: '#/components/schemas/Login'
         required: true
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
-        - { }
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -49,11 +49,11 @@ paths:
 
         Accepts/Returns nothing.
       tags:
-        - auth
+      - auth
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
-        - { }
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -70,7 +70,7 @@ paths:
         Accepts the following POST parameters: new_password1, new_password2
         Returns the success/fail message.
       tags:
-        - auth
+      - auth
       requestBody:
         content:
           application/json:
@@ -84,8 +84,8 @@ paths:
               $ref: '#/components/schemas/PasswordChange'
         required: true
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '200':
           content:
@@ -102,7 +102,7 @@ paths:
         Accepts the following POST parameters: email
         Returns the success/fail message.
       tags:
-        - auth
+      - auth
       requestBody:
         content:
           application/json:
@@ -116,9 +116,9 @@ paths:
               $ref: '#/components/schemas/PasswordReset'
         required: true
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
-        - { }
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -137,7 +137,7 @@ paths:
             new_password1, new_password2
         Returns the success/fail message.
       tags:
-        - auth
+      - auth
       requestBody:
         content:
           application/json:
@@ -151,9 +151,9 @@ paths:
               $ref: '#/components/schemas/PasswordResetConfirm'
         required: true
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
-        - { }
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -174,10 +174,10 @@ paths:
 
         Returns UserModel fields.
       tags:
-        - auth
+      - auth
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '200':
           content:
@@ -197,7 +197,7 @@ paths:
 
         Returns UserModel fields.
       tags:
-        - auth
+      - auth
       requestBody:
         content:
           application/json:
@@ -211,8 +211,8 @@ paths:
               $ref: '#/components/schemas/CustomUser'
         required: true
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '200':
           content:
@@ -232,7 +232,7 @@ paths:
 
         Returns UserModel fields.
       tags:
-        - auth
+      - auth
       requestBody:
         content:
           application/json:
@@ -245,8 +245,8 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedCustomUser'
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '200':
           content:
@@ -258,16 +258,16 @@ paths:
     get:
       operationId: tasks_task_retrieve
       parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
       tags:
-        - tasks
+      - tasks
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '200':
           content:
@@ -278,13 +278,13 @@ paths:
     put:
       operationId: tasks_task_update
       parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
       tags:
-        - tasks
+      - tasks
       requestBody:
         content:
           application/json:
@@ -298,8 +298,8 @@ paths:
               $ref: '#/components/schemas/Task'
         required: true
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '200':
           content:
@@ -310,13 +310,13 @@ paths:
     patch:
       operationId: tasks_task_partial_update
       parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
       tags:
-        - tasks
+      - tasks
       requestBody:
         content:
           application/json:
@@ -329,8 +329,8 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchedTask'
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '200':
           content:
@@ -341,40 +341,51 @@ paths:
     delete:
       operationId: tasks_task_destroy
       parameters:
-        - in: path
-          name: id
-          schema:
-            type: integer
-          required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
       tags:
-        - tasks
+      - tasks
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '204':
           description: No response body
   /api/v1/tasks/tasks/:
     get:
       operationId: tasks_tasks_list
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
       tags:
-        - tasks
+      - tasks
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '200':
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Task'
+                $ref: '#/components/schemas/PaginatedTaskList'
           description: ''
     post:
       operationId: tasks_tasks_create
       tags:
-        - tasks
+      - tasks
       requestBody:
         content:
           application/json:
@@ -388,8 +399,8 @@ paths:
               $ref: '#/components/schemas/Task'
         required: true
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '201':
           content:
@@ -400,19 +411,30 @@ paths:
   /api/v1/tasks/to-do/:
     get:
       operationId: tasks_to_do_list
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
       tags:
-        - tasks
+      - tasks
       security:
-        - cookieAuth: [ ]
-        - basicAuth: [ ]
+      - cookieAuth: []
+      - basicAuth: []
       responses:
         '200':
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Task'
+                $ref: '#/components/schemas/PaginatedTaskList'
           description: ''
 components:
   schemas:
@@ -436,10 +458,10 @@ components:
           title: Name of User
           maxLength: 255
       required:
-        - email
-        - full_name
-        - id
-        - username
+      - email
+      - full_name
+      - id
+      - username
     Login:
       type: object
       properties:
@@ -451,7 +473,27 @@ components:
         password:
           type: string
       required:
-        - password
+      - password
+    PaginatedTaskList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
     PasswordChange:
       type: object
       properties:
@@ -462,8 +504,8 @@ components:
           type: string
           maxLength: 128
       required:
-        - new_password1
-        - new_password2
+      - new_password1
+      - new_password2
     PasswordReset:
       type: object
       description: Serializer for requesting a password reset e-mail.
@@ -472,7 +514,7 @@ components:
           type: string
           format: email
       required:
-        - email
+      - email
     PasswordResetConfirm:
       type: object
       description: Serializer for confirming a password reset attempt.
@@ -488,10 +530,10 @@ components:
         token:
           type: string
       required:
-        - new_password1
-        - new_password2
-        - token
-        - uid
+      - new_password1
+      - new_password2
+      - token
+      - uid
     PatchedCustomUser:
       type: object
       description: User model w/o password
@@ -551,9 +593,9 @@ components:
           readOnly: true
     PriorityEnum:
       enum:
-        - 0
-        - 1
-        - 2
+      - 0
+      - 1
+      - 2
       type: integer
       description: |-
         * `0` - Thap
@@ -566,12 +608,12 @@ components:
           type: string
           readOnly: true
       required:
-        - detail
+      - detail
     StatusEnum:
       enum:
-        - 0
-        - 1
-        - 2
+      - 0
+      - 1
+      - 2
       type: integer
       description: |-
         * `0` - Chua lam
@@ -616,10 +658,10 @@ components:
           format: date-time
           readOnly: true
       required:
-        - created_time
-        - id
-        - modified_time
-        - name
+      - created_time
+      - id
+      - modified_time
+      - name
     Token:
       type: object
       description: Serializer for Token model.
@@ -628,7 +670,7 @@ components:
           type: string
           maxLength: 40
       required:
-        - key
+      - key
   securitySchemes:
     basicAuth:
       type: http
