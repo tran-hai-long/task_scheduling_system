@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Project apps
     "task_scheduling_system.users",
     "task_scheduling_system.tasks",
+    "task_scheduling_system.apis",
 ]
 
 MIDDLEWARE = [

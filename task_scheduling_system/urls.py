@@ -17,11 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from task_scheduling_system.tasks import urls as tasks_urls
-
 urlpatterns = [
-    path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('api-auth/', include('rest_framework.urls')),
+    path('auth/', include('dj_rest_auth.urls')),
     path('admin/', admin.site.urls),
-    path('', include(tasks_urls)),
+    path('api/', include('task_scheduling_system.apis.urls')),
 ]
