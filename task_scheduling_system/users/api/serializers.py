@@ -1,4 +1,5 @@
-from rest_framework.serializers import ModelSerializer
+from dj_rest_auth.serializers import UserDetailsSerializer
+from rest_framework.serializers import ModelSerializer, raise_errors_on_nested_writes
 
 from ..models import CustomUser
 
@@ -8,3 +9,17 @@ class CustomUserSerializer(ModelSerializer):
         model = CustomUser
         exclude = ['password']
         read_only_fields = ["last_login", "date_joined", "email"]
+
+
+class CustomUserAuthSerializer(UserDetailsSerializer):
+    class Meta(UserDetailsSerializer.Meta):
+        fields = ('id', 'email', 'username', 'full_name',)
+
+    def update(self, instance, validated_data):
+        raise_errors_on_nested_writes('update', self, validated_data)
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        setattr(instance, 'first_name', None)
+        setattr(instance, 'last_name', None)
+        instance.save()
+        return instance

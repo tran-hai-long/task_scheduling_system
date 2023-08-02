@@ -16,8 +16,12 @@ urlpatterns = [
     path('auth/registration/', include('dj_rest_auth.registration.urls')),
     path('confirm-email/<str:key>/', ConfirmEmailView.as_view(),
          name='account_confirm_email'),
+    path('account-email/', RedirectView.as_view(pattern_name='rest_login'),
+         name='account_email'),
     path('login-redirect', RedirectView.as_view(pattern_name='rest_login'),
-         name='account_login'),
+         name='account_login'),  # TODO: redirect to account_profile
+    path('logout-redirect', RedirectView.as_view(pattern_name='rest_logout'),
+         name='account_logout'),
     path('signup-redirect', RedirectView.as_view(pattern_name='rest_register'),
          name='account_signup')
 ]
