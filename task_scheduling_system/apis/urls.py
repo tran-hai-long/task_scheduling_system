@@ -6,6 +6,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, \
 
 urlpatterns = [
     path('tasks/', include('task_scheduling_system.tasks.api.urls')),
+    path('users/', include('task_scheduling_system.users.api.urls')),
     path(route='schema/', view=SpectacularAPIView.as_view(), name='schema'),
     path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'),
          name='swagger-ui'),

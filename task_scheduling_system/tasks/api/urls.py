@@ -1,7 +1,7 @@
 from django.urls import path
 
-from task_scheduling_system.tasks.api.views import TaskListCreateAPIView, \
-    TaskRetrieveUpdateDestroyAPIView, TodoListAPIView
+from ..api.views import TaskListCreateAPIView, TaskRetrieveUpdateDestroyAPIView, \
+    TodoListAPIView
 
 urlpatterns = [
     path(route='tasks/', view=TaskListCreateAPIView.as_view(),

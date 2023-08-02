@@ -153,7 +153,7 @@ REST_AUTH = {
 # allauth settings
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Task scheduling system',
