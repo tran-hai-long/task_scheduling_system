@@ -161,3 +161,5 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '0.1.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+LOGIN_REDIRECT_URL = '/api/v1/auth/user/'
