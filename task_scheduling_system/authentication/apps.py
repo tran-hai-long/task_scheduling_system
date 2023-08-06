@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ApisConfig(AppConfig):
+class AuthenticationConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'task_scheduling_system.apis'
+    name = 'task_scheduling_system.authentication'

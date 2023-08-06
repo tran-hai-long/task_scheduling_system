@@ -50,9 +50,9 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'drf_spectacular',
     # Project apps
-    "task_scheduling_system.users",
+    "task_scheduling_system.authentication",
     "task_scheduling_system.tasks",
-    "task_scheduling_system.apis",
+    "task_scheduling_system.users",
 ]
 
 SITE_ID = 1
