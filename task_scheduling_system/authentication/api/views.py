@@ -1,6 +1,7 @@
 import urllib
 
 from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView, SocialConnectView
 from django.shortcuts import redirect
@@ -20,4 +21,21 @@ def github_callback(request):
 class GithubConnectView(SocialConnectView):
     adapter_class = GitHubOAuth2Adapter
     callback_url = 'http://127.0.0.1:8000/api/v1/auth/github/callback/'
+    client_class = OAuth2Client
+
+
+class GoogleLoginView(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = 'http://127.0.0.1:8000/api/v1/auth/google/callback/'
+    client_class = OAuth2Client
+
+
+def google_callback(request):
+    params = urllib.parse.urlencode(request.GET)
+    return redirect(f'http://127.0.0.1:8000/api/v1/auth/google?{params}')
+
+
+class GoogleConnectView(SocialConnectView):
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = 'http://127.0.0.1:8000/api/v1/auth/google/callback/'
     client_class = OAuth2Client
