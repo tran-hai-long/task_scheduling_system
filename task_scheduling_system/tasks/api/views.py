@@ -9,6 +9,10 @@ from ..models import Task
 
 
 class TaskListCreateAPIView(ListCreateAPIView):
+    """
+    Return a list of all tasks created by the logged-in user. User can also POST to
+    create a new task.
+    """
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
 
@@ -26,6 +30,9 @@ class TaskListCreateAPIView(ListCreateAPIView):
 
 
 class TaskRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """
+    Get, update or delete a task created by the logged-in user.
+    """
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
 
@@ -49,6 +56,9 @@ class TaskRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 
 
 class TodoListAPIView(ListAPIView):
+    """
+    Return a list of all to-do tasks belong to the logged-in user.
+    """
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
 

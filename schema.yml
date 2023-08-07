@@ -8,26 +8,9 @@ paths:
     post:
       operationId: auth_github_create
       description: |-
-        class used for social authentications
-        example usage for facebook with access_token
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-        -------------
-
-        example usage for facebook with code
-
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-        from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-            client_class = OAuth2Client
-            callback_url = 'localhost:8000'
-        -------------
+        Receive code from user, send code to Github in exchange for an access token. Send
+        access token to Github to retrieve Github account email for use in authentication
+        or account registration.
       tags:
       - auth
       requestBody:
@@ -56,15 +39,8 @@ paths:
     post:
       operationId: auth_github_connect_create
       description: |-
-        class used for social account linking
-
-        example usage for facebook with access_token
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-
-        class FacebookConnect(SocialConnectView):
-            adapter_class = FacebookOAuth2Adapter
-        -------------
+        Functions similar to GithubLoginView, but will link a Github account to an
+        existing system account instead of creating a new account.
       tags:
       - auth
       requestBody:
@@ -92,26 +68,9 @@ paths:
     post:
       operationId: auth_google_create
       description: |-
-        class used for social authentications
-        example usage for facebook with access_token
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-        -------------
-
-        example usage for facebook with code
-
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-        from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-            client_class = OAuth2Client
-            callback_url = 'localhost:8000'
-        -------------
+        Receive code from user, send code to Google in exchange for an access token. Send
+        access token to Google to retrieve Google account email for use in authentication
+        or account registration.
       tags:
       - auth
       requestBody:
@@ -140,15 +99,8 @@ paths:
     post:
       operationId: auth_google_connect_create
       description: |-
-        class used for social account linking
-
-        example usage for facebook with access_token
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-
-        class FacebookConnect(SocialConnectView):
-            adapter_class = FacebookOAuth2Adapter
-        -------------
+        Functions similar to GoogleLoginView, but will link a Google account to an
+        existing system account instead of creating a new account.
       tags:
       - auth
       requestBody:
@@ -573,6 +525,7 @@ paths:
   /api/v1/tasks/task/{id}/:
     get:
       operationId: tasks_task_retrieve
+      description: Get, update or delete a task created by the logged-in user.
       parameters:
       - in: path
         name: id
@@ -593,6 +546,7 @@ paths:
           description: ''
     put:
       operationId: tasks_task_update
+      description: Get, update or delete a task created by the logged-in user.
       parameters:
       - in: path
         name: id
@@ -625,6 +579,7 @@ paths:
           description: ''
     patch:
       operationId: tasks_task_partial_update
+      description: Get, update or delete a task created by the logged-in user.
       parameters:
       - in: path
         name: id
@@ -656,6 +611,7 @@ paths:
           description: ''
     delete:
       operationId: tasks_task_destroy
+      description: Get, update or delete a task created by the logged-in user.
       parameters:
       - in: path
         name: id
@@ -673,6 +629,9 @@ paths:
   /api/v1/tasks/tasks/:
     get:
       operationId: tasks_tasks_list
+      description: |-
+        Return a list of all tasks created by the logged-in user. User can also POST to
+        create a new task.
       parameters:
       - name: limit
         required: false
@@ -700,6 +659,9 @@ paths:
           description: ''
     post:
       operationId: tasks_tasks_create
+      description: |-
+        Return a list of all tasks created by the logged-in user. User can also POST to
+        create a new task.
       tags:
       - tasks
       requestBody:
@@ -727,6 +689,7 @@ paths:
   /api/v1/tasks/to-do/:
     get:
       operationId: tasks_to_do_list
+      description: Return a list of all to-do tasks belong to the logged-in user.
       parameters:
       - name: limit
         required: false
@@ -755,6 +718,7 @@ paths:
   /api/v1/users/user/{id}/:
     get:
       operationId: users_user_retrieve
+      description: Get, update or delete a user. For admins only.
       parameters:
       - in: path
         name: id
@@ -775,6 +739,7 @@ paths:
           description: ''
     put:
       operationId: users_user_update
+      description: Get, update or delete a user. For admins only.
       parameters:
       - in: path
         name: id
@@ -807,6 +772,7 @@ paths:
           description: ''
     patch:
       operationId: users_user_partial_update
+      description: Get, update or delete a user. For admins only.
       parameters:
       - in: path
         name: id
@@ -838,6 +804,7 @@ paths:
           description: ''
     delete:
       operationId: users_user_destroy
+      description: Get, update or delete a user. For admins only.
       parameters:
       - in: path
         name: id
@@ -855,6 +822,7 @@ paths:
   /api/v1/users/users/:
     get:
       operationId: users_users_list
+      description: Return a list of all users in the database. For admins only.
       parameters:
       - name: limit
         required: false
