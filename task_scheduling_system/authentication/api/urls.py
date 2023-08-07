@@ -2,16 +2,33 @@ from allauth.account.views import ConfirmEmailView
 from allauth.socialaccount.providers.github import views as github_views
 from allauth.socialaccount.providers.google import views as google_views
 from dj_rest_auth.registration.views import SocialAccountListView, \
-    SocialAccountDisconnectView
-from django.urls import path, include
+    SocialAccountDisconnectView, VerifyEmailView, ResendEmailVerificationView
+from dj_rest_auth.views import PasswordResetView, PasswordResetConfirmView, LogoutView, \
+    PasswordChangeView
+from django.urls import path
 from django.views.generic import RedirectView
 
+from .views import CustomUserLoginView, CustomUserDetailsView, CustomUserRegisterView
 from ..api.views import GithubLoginView, github_callback, GithubConnectView, \
     GoogleLoginView, google_callback, GoogleConnectView
 
 urlpatterns = [
-    path('', include('dj_rest_auth.urls')),
-    path('registration/', include('dj_rest_auth.registration.urls')),
+    # dj_rest_auth urls
+    path(route='login/', view=CustomUserLoginView.as_view(), name='rest_login'),
+    path(route='logout/', view=LogoutView.as_view(), name='rest_logout'),
+    path(route='user/', view=CustomUserDetailsView.as_view(), name='rest_user_details'),
+    path(route='password/change/', view=PasswordChangeView.as_view(),
+         name='rest_password_change'),
+    path(route='password/reset/', view=PasswordResetView.as_view(),
+         name='rest_password_reset'),
+    path(route='password/reset/confirm/', view=PasswordResetConfirmView.as_view(),
+         name='rest_password_reset_confirm'),
+    path(route='registration/', view=CustomUserRegisterView.as_view(),
+         name='rest_register'),
+    path(route='registration/verify-email/', view=VerifyEmailView.as_view(),
+         name='rest_verify_email'),
+    path(route='registration/resend-email/', view=ResendEmailVerificationView.as_view(),
+         name="rest_resend_email"),
     path(route='confirm-email/<str:key>/', view=ConfirmEmailView.as_view(),
          name='account_confirm_email'),
     # Allauth url shenanigans

@@ -3,8 +3,48 @@ import urllib
 from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-from dj_rest_auth.registration.views import SocialLoginView, SocialConnectView
+from dj_rest_auth.registration.views import SocialLoginView, SocialConnectView, \
+    RegisterView
+from dj_rest_auth.views import LoginView, UserDetailsView
 from django.shortcuts import redirect
+
+
+class CustomUserLoginView(LoginView):
+    """
+    Check the credentials and return the REST Token
+    if the credentials are valid and authenticated.
+    Calls Django Auth login method to register User ID
+    in Django session framework.
+
+    Accept the following POST parameters: email, password
+
+    Return the REST Framework Token Object's key.
+    """
+
+
+class CustomUserDetailsView(UserDetailsView):
+    """
+    Reads and updates UserModel fields
+    Accepts GET, PUT, PATCH methods.
+
+    Default accepted fields: username, full_name
+
+    Default display fields: pk, username, email, full_name
+
+    Read-only fields: pk, email
+
+    Returns UserModel fields.
+    """
+
+
+class CustomUserRegisterView(RegisterView):
+    """
+    Create a new system account with credentials provided by the user.
+
+    Accepts username, email, password and retyped password.
+
+    Returns the REST Framework Token Object's key.
+    """
 
 
 class GithubLoginView(SocialLoginView):
