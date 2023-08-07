@@ -149,7 +149,7 @@ REST_FRAMEWORK = {
 }
 
 REST_AUTH = {
-    'USER_DETAILS_SERIALIZER': 'task_scheduling_system.users.api.serializers.CustomUserAuthSerializer',
+    'USER_DETAILS_SERIALIZER': 'task_scheduling_system.authentication.api.serializers.CustomUserAuthSerializer',
 }
 
 # allauth settings
