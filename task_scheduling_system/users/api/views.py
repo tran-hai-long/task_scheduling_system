@@ -2,7 +2,7 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.permissions import IsAdminUser
 
 from .serializers import CustomUserSerializer
-from ..models import CustomUser
+from ...authentication.models import CustomUser
 
 
 class CustomUserListAPIView(ListAPIView):

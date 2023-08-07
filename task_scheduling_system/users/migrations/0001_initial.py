@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.utils.timezone
-import task_scheduling_system.users.managers
+import task_scheduling_system.authentication.managers
 
 
 class Migration(migrations.Migration):
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
             managers=[
-                ('objects', task_scheduling_system.users.managers.CustomUserManager()),
+                ('objects', task_scheduling_system.authentication.managers.CustomUserManager()),
             ],
         ),
     ]

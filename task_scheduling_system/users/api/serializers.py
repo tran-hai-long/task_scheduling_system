@@ -1,7 +1,7 @@
 from dj_rest_auth.serializers import UserDetailsSerializer
 from rest_framework.serializers import ModelSerializer, raise_errors_on_nested_writes
 
-from ..models import CustomUser
+from ...authentication.models import CustomUser
 
 
 class CustomUserSerializer(ModelSerializer):

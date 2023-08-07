@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from ..users.models import CustomUser
+from ..authentication.models import CustomUser
 
 
 # Create your models here.
