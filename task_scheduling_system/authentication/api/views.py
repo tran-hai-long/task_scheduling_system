@@ -5,10 +5,13 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView, SocialConnectView, \
     RegisterView
+from dj_rest_auth.serializers import TokenSerializer
 from dj_rest_auth.views import LoginView, UserDetailsView
 from django.shortcuts import redirect
+from drf_spectacular.utils import extend_schema
 
 
+@extend_schema(responses=TokenSerializer)
 class CustomUserLoginView(LoginView):
     """
     Check the credentials and return the REST Token
@@ -37,6 +40,7 @@ class CustomUserDetailsView(UserDetailsView):
     """
 
 
+@extend_schema(responses=TokenSerializer)
 class CustomUserRegisterView(RegisterView):
     """
     Create a new system account with credentials provided by the user.
@@ -47,6 +51,7 @@ class CustomUserRegisterView(RegisterView):
     """
 
 
+@extend_schema(responses=TokenSerializer)
 class GithubLoginView(SocialLoginView):
     """
     Receive code from user, send code to Github in exchange for an access token. Send
@@ -77,6 +82,7 @@ class GithubConnectView(SocialConnectView):
     client_class = OAuth2Client
 
 
+@extend_schema(responses=TokenSerializer)
 class GoogleLoginView(SocialLoginView):
     """
     Receive code from user, send code to Google in exchange for an access token. Send
