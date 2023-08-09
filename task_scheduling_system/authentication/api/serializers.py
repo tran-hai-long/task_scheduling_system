@@ -1,4 +1,4 @@
-from dj_rest_auth.serializers import UserDetailsSerializer
+from dj_rest_auth.serializers import UserDetailsSerializer, LoginSerializer
 from rest_framework.serializers import raise_errors_on_nested_writes
 
 
@@ -14,3 +14,7 @@ class CustomUserAuthSerializer(UserDetailsSerializer):
         setattr(instance, 'last_name', None)
         instance.save()
         return instance
+
+
+class CustomUserLoginSerializer(LoginSerializer):
+    username = None
