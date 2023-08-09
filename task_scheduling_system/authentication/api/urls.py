@@ -23,7 +23,7 @@ urlpatterns = [
     #      name='rest_password_reset_confirm'),
     path(route='registration/', view=CustomUserRegisterView.as_view(),
          name='rest_register'),
-    path(route='account-confirm-email/', view=VerifyEmailView.as_view(),
+    path(route='registration/confirm-email/', view=VerifyEmailView.as_view(),
          name='account_email_verification_sent'),
     path(route='registration/resend-email/', view=ResendEmailVerificationView.as_view(),
          name="rest_resend_email"),
