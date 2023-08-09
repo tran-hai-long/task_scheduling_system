@@ -75,7 +75,7 @@ ROOT_URLCONF = 'task_scheduling_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'task_scheduling_system/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -158,9 +158,10 @@ REST_AUTH = {
 }
 
 # allauth settings
+ACCOUNT_ADAPTER = 'task_scheduling_system.authentication.api.adapters.CustomEmailAdapter'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Task scheduling system',
