@@ -2,7 +2,7 @@ from allauth.socialaccount.providers.github import views as github_views
 from allauth.socialaccount.providers.google import views as google_views
 from dj_rest_auth.registration.views import SocialAccountListView, \
     SocialAccountDisconnectView, VerifyEmailView, ResendEmailVerificationView
-from dj_rest_auth.views import PasswordResetView, PasswordResetConfirmView, LogoutView, \
+from dj_rest_auth.views import LogoutView, \
     PasswordChangeView
 from django.urls import path
 
@@ -17,10 +17,10 @@ urlpatterns = [
     path(route='user/', view=CustomUserDetailsView.as_view(), name='rest_user_details'),
     path(route='password/change/', view=PasswordChangeView.as_view(),
          name='rest_password_change'),
-    path(route='password/reset/', view=PasswordResetView.as_view(),
-         name='rest_password_reset'),
-    path(route='password/reset/confirm/', view=PasswordResetConfirmView.as_view(),
-         name='rest_password_reset_confirm'),
+    # path(route='password/reset/', view=PasswordResetView.as_view(),
+    #      name='rest_password_reset'),
+    # path(route='password/reset/confirm/', view=PasswordResetConfirmView.as_view(),
+    #      name='rest_password_reset_confirm'),
     path(route='registration/', view=CustomUserRegisterView.as_view(),
          name='rest_register'),
     path(route='account-confirm-email/', view=VerifyEmailView.as_view(),
