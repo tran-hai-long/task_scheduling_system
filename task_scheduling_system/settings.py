@@ -144,8 +144,7 @@ AUTH_USER_MODEL = "authentication.CustomUser"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
@@ -155,7 +154,10 @@ REST_FRAMEWORK = {
 REST_AUTH = {
     'USER_DETAILS_SERIALIZER': 'task_scheduling_system.authentication.api.serializers.CustomUserAuthSerializer',
     'LOGIN_SERIALIZER': 'task_scheduling_system.authentication.api.serializers.CustomUserLoginSerializer',
-    'OLD_PASSWORD_FIELD_ENABLED': True
+    'OLD_PASSWORD_FIELD_ENABLED': True,
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'token',
+    'JWT_AUTH_REFRESH_COOKIE': 'refresh-token',
 }
 
 # allauth settings
