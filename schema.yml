@@ -33,7 +33,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/JWT'
           description: ''
   /api/v1/auth/github/connect/:
     post:
@@ -93,7 +93,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/JWT'
           description: ''
   /api/v1/auth/google/connect/:
     post:
@@ -159,7 +159,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/JWT'
           description: ''
   /api/v1/auth/logout/:
     post:
@@ -246,7 +246,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/JWT'
           description: ''
   /api/v1/auth/registration/confirm-email/:
     post:
@@ -883,6 +883,20 @@ components:
           type: string
       required:
       - password
+    JWT:
+      type: object
+      description: Serializer for JWT authentication.
+      properties:
+        access:
+          type: string
+        refresh:
+          type: string
+        user:
+          $ref: '#/components/schemas/CustomUserAuth'
+      required:
+      - access
+      - refresh
+      - user
     PaginatedCustomUserList:
       type: object
       properties:
@@ -1220,15 +1234,6 @@ components:
       - id
       - modified_time
       - name
-    Token:
-      type: object
-      description: Serializer for Token model.
-      properties:
-        key:
-          type: string
-          maxLength: 40
-      required:
-      - key
     VerifyEmail:
       type: object
       properties:
