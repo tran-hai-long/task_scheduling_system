@@ -154,6 +154,7 @@ REST_FRAMEWORK = {
 REST_AUTH = {
     'USER_DETAILS_SERIALIZER': 'task_scheduling_system.authentication.api.serializers.CustomUserAuthSerializer',
     'LOGIN_SERIALIZER': 'task_scheduling_system.authentication.api.serializers.CustomUserLoginSerializer',
+    'REGISTER_SERIALIZER': 'task_scheduling_system.authentication.api.serializers.CustomRegisterSerializer',
     'OLD_PASSWORD_FIELD_ENABLED': True,
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'token',
