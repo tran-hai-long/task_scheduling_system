@@ -1,12 +1,12 @@
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import UserDetailsSerializer, LoginSerializer
 from rest_framework import serializers
-from rest_framework.serializers import raise_errors_on_nested_writes
+from rest_framework.serializers import raise_errors_on_nested_writes, Serializer
 
 
 class CustomUserAuthSerializer(UserDetailsSerializer):
     class Meta(UserDetailsSerializer.Meta):
-        fields = ('id', 'email', 'username', 'full_name',)
+        fields = ('id', 'email', 'username')
 
     def update(self, instance, validated_data):
         raise_errors_on_nested_writes('update', self, validated_data)
@@ -39,3 +39,7 @@ class CustomRegisterSerializer(RegisterSerializer):
             'password1': self.validated_data.get('password', ''),
             'email': self.validated_data.get('email', ''),
         }
+
+
+class DetailSerializer(Serializer):
+    detail = serializers.CharField()

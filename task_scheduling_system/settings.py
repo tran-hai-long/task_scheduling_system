@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     "task_scheduling_system.users",
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -165,7 +165,7 @@ REST_AUTH = {
 ACCOUNT_ADAPTER = 'task_scheduling_system.authentication.api.adapters.CustomEmailAdapter'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Task scheduling system',
@@ -175,3 +175,5 @@ SPECTACULAR_SETTINGS = {
 }
 
 LOGIN_REDIRECT_URL = '/api/v1/auth/user/'
+
+FRONTEND_CONFIRM_EMAIL_URL = '127.0.0.1:5173/auth/confirm-email/'

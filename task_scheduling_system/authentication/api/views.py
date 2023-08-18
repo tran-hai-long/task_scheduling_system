@@ -4,11 +4,13 @@ from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView, SocialConnectView, \
-    RegisterView, SocialAccountDisconnectView
+    RegisterView, SocialAccountDisconnectView, VerifyEmailView
 from dj_rest_auth.serializers import JWTSerializer
-from dj_rest_auth.views import LoginView, UserDetailsView
+from dj_rest_auth.views import LoginView
 from django.shortcuts import redirect
 from drf_spectacular.utils import extend_schema
+
+from task_scheduling_system.authentication.api.serializers import DetailSerializer
 
 
 @extend_schema(responses=JWTSerializer)
@@ -25,22 +27,7 @@ class CustomUserLoginView(LoginView):
     """
 
 
-class CustomUserDetailsView(UserDetailsView):
-    """
-    Reads and updates UserModel fields
-    Accepts GET, PUT, PATCH methods.
-
-    Default accepted fields: username, full_name
-
-    Default display fields: pk, username, email, full_name
-
-    Read-only fields: pk, email
-
-    Returns UserModel fields.
-    """
-
-
-@extend_schema(responses=JWTSerializer)
+@extend_schema(responses=DetailSerializer)
 class CustomUserRegisterView(RegisterView):
     """
     Create a new system account with credentials provided by the user.
@@ -49,6 +36,11 @@ class CustomUserRegisterView(RegisterView):
 
     Returns the REST Framework Token Object's key.
     """
+
+
+@extend_schema(responses=DetailSerializer)
+class CustomVerifyEmailView(VerifyEmailView):
+    """Verify email"""
 
 
 @extend_schema(responses=JWTSerializer)

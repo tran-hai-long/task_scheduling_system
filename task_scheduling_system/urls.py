@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from dj_rest_auth.views import UserDetailsView, PasswordChangeView
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
@@ -25,6 +26,7 @@ urlpatterns = [
     path('api/v1/auth/', include('task_scheduling_system.authentication.api.urls')),
     path('api/v1/tasks/', include('task_scheduling_system.tasks.api.urls')),
     path('api/v1/users/', include('task_scheduling_system.users.api.urls')),
+    path('api/v1/user/', include('task_scheduling_system.user.api.urls')),
     path(route='api/v1/schema/', view=SpectacularAPIView.as_view(), name='schema'),
     path(route='api/v1/schema/swagger-ui/',
          view=SpectacularSwaggerView.as_view(url_name='schema'),
