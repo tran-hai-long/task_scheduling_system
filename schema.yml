@@ -277,19 +277,6 @@ paths:
     get:
       operationId: auth_socialaccounts_list
       description: List SocialAccounts for the currently logged in user
-      parameters:
-      - name: limit
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      - name: offset
-        required: false
-        in: query
-        description: The initial index from which to return the results.
-        schema:
-          type: integer
       tags:
       - auth
       security:
@@ -300,7 +287,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedSocialAccountList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/SocialAccount'
           description: ''
   /api/v1/auth/socialaccounts/{id}/disconnect/:
     post:
@@ -442,19 +431,6 @@ paths:
       description: |-
         Return a list of all tasks created by the logged-in user. User can also POST to
         create a new task.
-      parameters:
-      - name: limit
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      - name: offset
-        required: false
-        in: query
-        description: The initial index from which to return the results.
-        schema:
-          type: integer
       tags:
       - tasks
       security:
@@ -465,7 +441,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedTaskList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
           description: ''
     post:
       operationId: tasks_tasks_create
@@ -500,19 +478,6 @@ paths:
     get:
       operationId: tasks_to_do_list
       description: Return a list of all to-do tasks belong to the logged-in user.
-      parameters:
-      - name: limit
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      - name: offset
-        required: false
-        in: query
-        description: The initial index from which to return the results.
-        schema:
-          type: integer
       tags:
       - tasks
       security:
@@ -523,7 +488,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedTaskList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
           description: ''
   /api/v1/user/change-password/:
     post:
@@ -754,19 +721,6 @@ paths:
     get:
       operationId: users_users_list
       description: Return a list of all users in the database. For admins only.
-      parameters:
-      - name: limit
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      - name: offset
-        required: false
-        in: query
-        description: The initial index from which to return the results.
-        schema:
-          type: integer
       tags:
       - users
       security:
@@ -777,7 +731,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedCustomUserList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomUser'
           description: ''
 components:
   schemas:
@@ -911,66 +867,6 @@ components:
       - access
       - refresh
       - user
-    PaginatedCustomUserList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomUser'
-    PaginatedSocialAccountList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SocialAccount'
-    PaginatedTaskList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?offset=400&limit=100
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?offset=200&limit=100
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Task'
     PasswordChange:
       type: object
       properties:
